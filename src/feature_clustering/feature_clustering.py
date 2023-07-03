@@ -27,7 +27,7 @@ class FeatureCluster:
         self.kmeans.fit(self.X.T)
         self.labels = self.kmeans.labels_
 
-    def plot(self, plot_type="hist"):
+    def plot(self, plot_type="hist", **kwargs):
         if plot_type == "hist":
             pal = ["#682F2F","#B9C0C9", "#9F8A78","#F3AB60"]
             sns.countplot(x=self.labels, palette= pal)
@@ -36,7 +36,7 @@ class FeatureCluster:
             plt.ylabel("Frecuencia")
             plt.show()
         elif plot_type == "tsne":
-            tsne = TSNE(n_components=2)
+            tsne = TSNE(n_components=2, **kwargs)
             embeddings = tsne.fit_transform(self.X.T)
             vis_data = pd.DataFrame(embeddings, index=self.X.T.index)
             vis_data["cluster"] = self.labels
@@ -44,7 +44,7 @@ class FeatureCluster:
                 x=0, y=1, hue="cluster", data=vis_data, palette=sns.color_palette("hls", 8)
             )
         elif plot_type == "umap":
-            embeddings = umap.UMAP(n_neighbors=self.k).fit(self.X.T).embedding_
+            embeddings = umap.UMAP(n_neighbors=self.k, **kwargs).fit(self.X.T).embedding_
             vis_data = pd.DataFrame(embeddings, index=self.X.T.index)
             vis_data["cluster"] = self.labels
             sns.scatterplot(
