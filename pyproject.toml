@@ -1,0 +1,36 @@
+[project]
+name = "feature_clustering"
+version = "0.0.1"
+authors = [ 
+    { name="Guillem Molina Galera", email="guillem.moga@gmail.com" }, 
+    { name="Helena García Mieres", email="helenagmieres@gmail.com" }, 
+    { name="Adrián García Hermoso", email="adriangarciahermoso@gmail.com" }, 
+] 
+description = "Toolbox designed to aid with the selection of features"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operatiung System :: Windows",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "build>=0.8.0",
+    "matplotlib>=3.7.1",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.2.2",
+    "seaborn>=0.12.2",
+    "umap-learn>=0.5.3",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/gmolinga/ML-MSc-capstone-project"
+"Bug Tracker" = "https://github.com/gmolinga/ML-MSc-capstone-project/issues"
+"Wiki" = "https://github.com/gmolinga/ML-MSc-capstone-project/wiki"
+
+[build-system]
+requires = [
+    "pip>=21.0.1",
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

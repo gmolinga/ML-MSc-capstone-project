@@ -1,0 +1,6 @@
+build>=0.8.0
+matplotlib>=3.7.1
+pandas>=2.0.0
+scikit-learn>=1.2.2
+seaborn>=0.12.2
+umap-learn>=0.5.3
