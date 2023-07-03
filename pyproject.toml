@@ -1,6 +1,6 @@
 [project]
 name = "feature_clustering"
-version = "0.0.2"
+version = "0.0.3"
 authors = [ 
     { name="Guillem Molina Galera", email="guillem.moga@gmail.com" }, 
     { name="Helena García Mieres", email="helenagmieres@gmail.com" }, 
