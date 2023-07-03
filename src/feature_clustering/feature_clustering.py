@@ -1,8 +1,10 @@
+import math
+
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.manifold import TSNE
-import umap # pip install umap-learn
+import umap
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -10,7 +12,7 @@ from . import dunn_index
 
 class FeatureCluster:
 
-    def __init__(self, k=8, init="k-means++", max_iter=100 ,standarize=True):
+    def __init__(self, k="auto", init="k-means++", max_iter=100 ,standarize=True):
         self.k = k
         self.init = init
         self.max_iter = max_iter
@@ -23,7 +25,21 @@ class FeatureCluster:
         self.X = X
         self.y = y
 
-        self.kmeans = KMeans(n_clusters=self.k, init=self.init, max_iter=self.max_iter)
+        if self.k == "auto":
+            tries = {}
+            for try_k in range(2, int(math.sqrt(self.X.shape[1]))+1 ):
+                kmeans = KMeans(n_clusters=try_k, init=self.init, max_iter=self.max_iter, n_init="auto")
+                kmeans.fit(self.X.T)
+                score = dunn_index.evaluation_indices["Silhouette Coefficient"](self.X.T, kmeans.labels_)
+                tries[try_k] = {
+                    "kmeans": kmeans,
+                    "score": score,
+                }
+                print(f"KMeans with k '{try_k}' has a silhouette coefficient of '{score}'")
+            best_iteration = sorted(tries.items(), key=lambda x: x[1]["score"], reverse=True)[0]
+            self.k = best_iteration[0]
+            self.kmeans = best_iteration[1]["kmeans"]
+        self.kmeans = KMeans(n_clusters=self.k, init=self.init, max_iter=self.max_iter, n_init="auto")
         self.kmeans.fit(self.X.T)
         self.labels = self.kmeans.labels_
 

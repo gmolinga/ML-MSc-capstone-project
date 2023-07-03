@@ -1,6 +1,6 @@
 [project]
 name = "feature_clustering"
-version = "0.0.1"
+version = "0.0.2"
 authors = [ 
     { name="Guillem Molina Galera", email="guillem.moga@gmail.com" }, 
     { name="Helena García Mieres", email="helenagmieres@gmail.com" }, 
@@ -14,7 +14,6 @@ classifiers = [
 ]
 requires-python = ">=3.9"
 dependencies = [
-    "build>=0.8.0",
     "matplotlib>=3.7.1",
     "pandas>=2.0.0",
     "scikit-learn>=1.2.2",
